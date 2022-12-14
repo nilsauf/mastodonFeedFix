@@ -3,7 +3,7 @@ class MastodonFeedFix extends Plugin {
 
 	private $api_instance = "/api/v2/instance";
 	private $source_url = "https://github.com/mastodon/mastodon";
-	private $maxTitleLength = 50;
+	private $maxTitleLength = 47;
 	private $host;
 	private $hostNames;
 
@@ -49,7 +49,7 @@ class MastodonFeedFix extends Plugin {
 	function hook_render_article($article) {
 		if($this->is_from_mastodon($article)) {
 			$newTitle = mb_substr($article["content"], 0, $this->maxTitleLength);
-			$article["title"] = $newTitle;
+			$article["title"] = $newTitle . "...";
 		}
 
 		return $article;
